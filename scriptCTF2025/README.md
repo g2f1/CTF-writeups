@@ -8,9 +8,13 @@ SscriptCTF is a beginner-friendly CTF competition presented by ScriptSorcerers.
 
 My team : 
 - Name : Here2Learn
-- Rank : 
-- Solved challenges : 
+  
+- Rank :
+  
+- Solved challenges :
+  
 - Total points : 
+
 
 
 
