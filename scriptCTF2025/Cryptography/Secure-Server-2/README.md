@@ -49,15 +49,9 @@ The weakness here lies in the **AES key sizes**:
 
 This drastically reduces the key space, making brute force feasible.  
 
-We start with `k1` and `k2`. The encryption scheme is:  
+We start with `k1` and `k2`. And we use the provided Ek2(Ek1(sescret))). So when decrypting with the write keys with end up with secret and since we also know that the latter begins with **`scriptCTF{`** we test until finding the right keys
 
-\[
-C = E_{k2}(E_{k1}(secret))
-\]
-
-We also know that the secret begins with **`scriptCTF`**.  
-
-The following script brute-forces `k1` and `k2`, recovering both the keys and the plaintext:
+With all this, I write a python script to brute-forces `k1` and `k2`, and recovering both the keys and the plaintext:
 
 
 ```python
@@ -67,7 +61,7 @@ import string
 import sys
 
 # Inner ciphertext from the server
-inner_ciphertext_hex = "19574ac010cc9866e733adc616065e6c019d85dd0b46e5c2190c31209fc57727"
+inner_ciphertext_hex = "19574ac010cc9866e733adc616065e6c019d85dd0b46e5c2190c31209fc57727" # Ek2(Ek1(secret)))
 inner_ciphertext = bytes.fromhex(inner_ciphertext_hex)
 
 # Known plaintext prefix
@@ -104,23 +98,13 @@ for k1_bytes in product(ALPHABET_BYTES, repeat=2):
 print("No matching keys found.")
 
 ```
+![image](./r1.png)
+
 For `k3` and `k4`, I applied the same brute-force logic.  
 The difference is that `k4` has a **fixed part**, which must contain the closing brace "`}`".  
 
-At this stage, the encryption flow looks like this:  
-
-\[
-C = E_{k4}(E_{k3}(E_{k2}(E_{k1}(secret))))
-\]
-
-So, during decryption, we try:  
-
-\[
-P = D_{k1}(D_{k2}(D_{k3}(D_{k4}(C))))
-\]
-
-To validate our result, we check whether the intermediate decryption produces a string starting with **`19574ac010`** (the first hex digits of `E_{k2}(E_{k1}(secret))`).  
-If this condition is satisfied, then we have successfully found `k3` and `k4`. ✅
+At this stage, we use the provided Ek4(Ek3(Ek2(Ek1(secret)))) so when decrypting with the write k3 and k4 keys we get Ek2(Ek1(secret)) that we also know. To validate our result, we check whether the intermediate decryption produces a string starting with **`19574ac010`** (the first hex digits of `E_{k2}(E_{k1}(secret))`).  
+If this condition is satisfied, then we have successfully found `k3` and `k4`.
 
 ```python
 from Crypto.Cipher import AES
@@ -166,6 +150,9 @@ for k3_bytes in product(ALPHABET_BYTES, repeat=2):
 print("No matching keys found.")
 
 ```
+![image](./r2.png)
+
 Finally conctanating all the parts gives the flag 
 
 - **Flag** : scriptCTF{s3cr37_m3ss4g3_1337!_7e4b3f8d}
+
