@@ -42,7 +42,7 @@ And here is the final script
 ```python
 from sympy import integer_nthroot
 
-# Given data
+# out.txt
 n1 = 156503881374173899106040027210320626006530930815116631795516553916547375688556673985142242828597628615920973708595994675661662789752600109906259326160805121029243681236938272723595463141696217880136400102526509149966767717309801293569923237158596968679754520209177602882862180528522927242280121868961697240587
 c1 = 77845730447898247683281609913423107803974192483879771538601656664815266655476695261695401337124553851404038028413156487834500306455909128563474382527072827288203275942719998719612346322196694263967769165807133288612193509523277795556658877046100866328789163922952483990512216199556692553605487824176112568965
 
@@ -60,12 +60,11 @@ def crt(c_list, n_list):
     result = 0
     for c, n in zip(c_list, n_list):
         m = N // n
-        # Modular inverse
         inv = pow(m, -1, n)
         result += c * inv * m
     return result % N
 
-# Apply CRT
+
 c_list = [c1, c2, c3]
 n_list = [n1, n2, n3]
 
@@ -74,20 +73,11 @@ m_cubed = crt(c_list, n_list)
 # Take integer cube root
 m, exact = integer_nthroot(m_cubed, e)
 if exact:
-    print("Recovered message as integer:")
-    print(m)
-    # Optionally convert to bytes if message was text
-    try:
-        msg_bytes = int.to_bytes(m, (m.bit_length() + 7) // 8, 'big')
-        print("Message as bytes:")
-        print(msg_bytes)
-        print("Message as string:")
-        print(msg_bytes.decode())
-    except:
-        print("Cannot decode to string")
+    print("flag = ", m)
 else:
-    print("Cube root not exact, something went wrong")
+    print("Cube root not exact")
 ```
+
 
 
 
