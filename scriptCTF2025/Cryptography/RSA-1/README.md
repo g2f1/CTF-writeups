@@ -31,9 +31,12 @@ C<sub>3</sub> = M<sup>3</sup> mod N<sub>3</sub>
 
 Using the CRT (we assume that gcd(N<sub>i</sub>,N<sub>j</sub>) = 1 for i,j in {1..3} if not we can factorize one modulus and decrypt the message) we find C such as:
 
-C = M<sup>3</sup> mod <sub>1</sub>N<sub>2</sub>N<sub>3</sub>
+C = M<sup>3</sup> mod N<sub>1</sub>N<sub>2</sub>N<sub>3</sub>
 
-Since M < N<sub>i</sub> for i in {1..3} , M<sup>3</sup> < <sub>1</sub>N<sub>2</sub>N<sub>3</sub>
+Since M < N<sub>i</sub> for i in {1..3} , M<sup>3</sup> < N<sub>1</sub>N<sub>2</sub>N<sub>3</sub> 
+
+So  C = M<sup>3</sup>  to get M we just compute the cubic root of C
+
 
 
 
