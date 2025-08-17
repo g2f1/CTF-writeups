@@ -21,6 +21,11 @@ e = 3
 
 It's a known attack on RSA, a simple version of the Håstad's broadcast attack
 
-C1 = M<sup>2</sup>
+C<sub>1</sub> = M<sup>3</sup> mod C<sub>1</sub>
+
+C<sub>2</sub> = M<sup>3</sup> mod C<sub>2</sub>
+
+C<sub>3</sub> = M<sup>3</sup> mod C<sub>3</sub>
+
 
 
