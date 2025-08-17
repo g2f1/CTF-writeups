@@ -78,6 +78,7 @@ else:
     print("Cube root not exact")
 ```
 
+- **Flag** : scriptCTF{y0u_f0und_mr_yu's_s3cr3t_m3g_12a4e4}
 
 
 
