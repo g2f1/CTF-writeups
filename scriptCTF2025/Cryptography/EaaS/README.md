@@ -107,7 +107,16 @@ The server checks the value of has_flag: if it is True, it prints the flag; othe
   
 ![image](./seven.png)
 
-The server decrypts whatever ciphertext a user provides .It checks if the message length is a multiple of 16 and if its last 16 bytes is "@script.sorcerer" to confirm you are in the right domain. If valid, it calls send_email(). One last thing The variable "sent" just checks if the email is already sent by the server, it stops us from choosing the seconf option more then one. So we need to start from here and meet the requirement to make the server call send_email with all the requirement
+The server decrypts any ciphertext provided by the user. It first checks that the input length is a multiple of 16 bytes and that the last 16 bytes equal `@script.sorcerer` to verify the correct domain. If both conditions are satisfied, it calls `send_email()`. The `sent` variable simply prevents option 2 from being used more than once. Therefore, our goal is to craft input that makes the server execute `send_email()` while fulfilling all its requirements.
 
-To sum up, the server starts by generating a random email address and assign it the user, after that it asks for password in hex that will be encrypted and gived back to the user. Then the server asks to choose an option; the first one verify the has_flag variable and return the flag if it's set to true, the second option the server asks for a hex string that will decrypt and see if it match two requirements(being a multiple of 16 and ends up with "@script.sorcerer"). If so it calls the function send_email which checks if the email generated exist among the recipient and change the value of has_flag variable. 
+In summary, the server workflow is as follows:
+
+1. A random email is generated and assigned to the user.  
+2. The server asks for a password in hex, which it encrypts and returns.  
+3. The user chooses an option:  
+   - **Option 1:** Checks the `has_flag` variable and returns the flag if it is `True`.  
+   - **Option 2:** Requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
+
+To solve the challenge, we need to craft a password that meets the constraints, then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
+
 
