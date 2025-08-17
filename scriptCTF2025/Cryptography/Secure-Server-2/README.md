@@ -118,7 +118,7 @@ inner_ciphertext = bytes.fromhex(inner_ciphertext_hex)
 # Known plaintext prefix
 KNOWN_PREFIX = bytes.fromhex("19574ac010")
 
-# Allowed bytes for keys (ASCII letters only)
+# Allowed bytes for keys (ASCII letters and digits only)
 ALPHABET_BYTES = [ord(c) for c in string.ascii_letters+string.digits]
 
 # Convert 2-byte key to AES key
@@ -155,4 +155,5 @@ print("No matching keys found.")
 Finally conctanating all the parts gives the flag 
 
 - **Flag** : scriptCTF{s3cr37_m3ss4g3_1337!_7e4b3f8d}
+
 
