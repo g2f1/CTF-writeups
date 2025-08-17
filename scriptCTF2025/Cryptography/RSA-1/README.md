@@ -29,7 +29,8 @@ C<sub>2</sub> = M<sup>3</sup> mod N<sub>2</sub>
 
 C<sub>3</sub> = M<sup>3</sup> mod N<sub>3</sub>
 
-using the CRT we get the following (we assume that gcd(N<sub>i</sub>,N<sub>j</sub>) = 1 for i,j in {1..3} if not we can factorize on modulus and decrypt the message):
+Using the CRT we get the following (we assume that gcd(N<sub>i</sub>,N<sub>j</sub>) = 1 for i,j in {1..3} if not we can factorize one modulus and decrypt the message):
+
 
 
 
