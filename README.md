@@ -3,7 +3,7 @@
 In this repo I will share writeups for every challenge — obviously not posting writeups for the silly ~~OSINT~~ — I solved and found interesting to share.
 Most of the time you will find challenges related to **cryptography**. Yeah I know, crypto gives headaches. but don’t worry, I’ll do my best to simplify the solving process so the only one getting a headache is me.
 
-Enjoy
+Learn & Enjoy
 
 Best regards,
 
