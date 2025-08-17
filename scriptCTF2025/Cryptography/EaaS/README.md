@@ -75,11 +75,11 @@ It seems too large, but don't worry I will try to explain what it does step by s
 
 ![image](./one.png)
 
-In this section, a set of variables is defined. We can see that the server will use AES-CBC for encryption with a securely generated random key and IV, but this mode is vulnerable to some attacks like bit flipping. There is also two interesting boolean variables, has_flag and sent, are both initialized to false. These might play a crucial role in discovering the flag. 
+In this section, a set of variables is defined. We can see that the server will use `AES-CBC` for encryption and decryption with a securely generated random key and IV, but this mode is vulnerable to some attacks like `bit flipping`. There is also two interesting boolean variables, has_flag and sent, are both initialized to false. These might play a crucial role in discovering the flag. 
 
 ![image](./two.png)
 
-The send_email function takes a byte string representing a recipient email (or a comma-separated list of recipients) and iterates through it. If any entry exactly matches the user’s assigned email, it sets the global has_flag variable to True.
+The `send_email` function takes a byte string representing a recipient email (or a comma-separated list of recipients) and iterates through it. If any entry exactly matches the user’s assigned email, it sets the global has_flag variable to `True`.
 
 ![image](./three.png)
 
@@ -101,7 +101,7 @@ After that the server gave you two options :
   
 ![image](./6ix.png)
 
-The server checks the value of has_flag: if it is True, it prints the flag; otherwise, it prints “No new emails.” This means we need to trigger the server to execute the send_email function and satisfy its conditions in order to set has_flag to True. The question then becomes: where in the code is send_email called, and under what circumstances? We'll see.
+The server checks the value of has_flag: if it is True, it prints the flag; otherwise, it prints “No new emails.” This means we need to trigger the server to execute the `send_email` function and satisfy its conditions in order to set has_flag to True. The question then becomes: where in the code is `send_email` called, and under what circumstances? We'll see.
 
 - option 2:
   
@@ -118,5 +118,6 @@ In summary, the server workflow is as follows:
    - **Option 2:** Requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
 
 To solve the challenge, we need to craft a password that meets the constraints, then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
+
 
 
