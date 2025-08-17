@@ -89,11 +89,11 @@ This function assign a random email address ending in @notscript.sorcerer to the
 
 User must provide a password in hex. Three restrictions:
 
-     - Must be a multiple of 16 bytes (AES block size).
+   - Must be a multiple of 16 bytes (AES block size).
 
-     - Cannot directly contain @script.sorcerer.
+   - Cannot directly contain @script.sorcerer.
 
-     - Cannot contain your assigned email
+   - Cannot contain your assigned email
 
 After that the server gave you two options :
 
@@ -110,3 +110,4 @@ The server checks the value of has_flag: if it is True, it prints the flag; othe
 The server decrypts whatever ciphertext a user provides .It checks if the message length is a multiple of 16 and if its last 16 bytes is "@script.sorcerer" to confirm you are in the right domain. If valid, it calls send_email(). One last thing The variable "sent" just checks if the email is already sent by the server, it stops us from choosing the seconf option more then one. So we need to start from here and meet the requirement to make the server call send_email with all the requirement
 
 To sum up, the server starts by generating a random email address and assign it the user, after that it asks for password in hex that will be encrypted and gived back to the user. Then the server asks to choose an option; the first one verify the has_flag variable and return the flag if it's set to true, the second option the server asks for a hex string that will decrypt and see if it match two requirements(being a multiple of 16 and ends up with "@script.sorcerer"). If so it calls the function send_email which checks if the email generated exist among the recipient and change the value of has_flag variable. 
+
