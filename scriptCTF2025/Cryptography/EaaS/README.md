@@ -74,19 +74,19 @@ while True:
 ```
 It seems too large, but don't worry I will try to explain what it does step by step
 
-#### Global Variables
+### 1-Global Variables
 ![image](./one.png)
 
 In this section, a set of variables is defined. We can see that the server will use `AES-CBC` for encryption and decryption with a securely generated random key and IV, but this mode is vulnerable to some attacks like `bit flipping`. There is also two interesting boolean variables, has_flag and sent, are both initialized to false. These might play a crucial role in discovering the flag. 
-#### send_email function
+### 2-send_email function
 ![image](./two.png)
 
 The `send_email` function takes a byte string representing a recipient email (or a comma-separated list of recipients) and iterates through it. If any entry exactly matches the user’s assigned email, it sets the global has_flag variable to `True`.
-#### email generation
+### 3-email generation
 ![image](./three.png)
 
 This function assign a random email address ending in @notscript.sorcerer to the user.
-#### password restrictions
+### 4-password restrictions
 ![image](./four.png)
 
 User must provide a password in hex. Three restrictions:
@@ -96,7 +96,7 @@ User must provide a password in hex. Three restrictions:
    - Cannot directly contain @script.sorcerer.
 
    - Cannot contain your assigned email
-#### Options
+### 5-Options
 After that the server gave you two options :
 
 - option 1:
@@ -126,6 +126,7 @@ To solve the challenge, we need to craft a password that meets the constraints(m
 So let's dive in. First, we need to discuss the bit-flipping attack. But before that, let's review how decryption works in CBC mode, since this is precisely where the attack takes place.
 
 ![image](./CBC.svg)
+
 
 
 
