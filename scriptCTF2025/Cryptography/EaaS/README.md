@@ -125,7 +125,8 @@ To solve the challenge, we need to craft a password that meets the constraints(m
 
 So let's dive in. First, we need to discuss the bit-flipping attack. But before that, let's review how decryption works in CBC mode, since this is precisely where the attack takes place.
 
-![image](./CBC.svg)
+![image](./CBC.png)
+
 
 
 
