@@ -74,18 +74,19 @@ while True:
 ```
 It seems too large, but don't worry I will try to explain what it does step by step
 
+#### Global Variables
 ![image](./one.png)
 
 In this section, a set of variables is defined. We can see that the server will use `AES-CBC` for encryption and decryption with a securely generated random key and IV, but this mode is vulnerable to some attacks like `bit flipping`. There is also two interesting boolean variables, has_flag and sent, are both initialized to false. These might play a crucial role in discovering the flag. 
-
+#### send_email function
 ![image](./two.png)
 
 The `send_email` function takes a byte string representing a recipient email (or a comma-separated list of recipients) and iterates through it. If any entry exactly matches the user’s assigned email, it sets the global has_flag variable to `True`.
-
+#### email generation
 ![image](./three.png)
 
 This function assign a random email address ending in @notscript.sorcerer to the user.
-
+#### password restrictions
 ![image](./four.png)
 
 User must provide a password in hex. Three restrictions:
@@ -95,7 +96,7 @@ User must provide a password in hex. Three restrictions:
    - Cannot directly contain @script.sorcerer.
 
    - Cannot contain your assigned email
-
+#### Options
 After that the server gave you two options :
 
 - option 1:
@@ -117,11 +118,14 @@ In summary, the server workflow is as follows:
 3. The user chooses an option:  
    - **Option 1:** The server checks the `has_flag` variable and returns the flag if it is `True`.  
    - **Option 2:** The server requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
+     
+# The attack
 
 To solve the challenge, we need to craft a password that meets the constraints(maybe we can change one char from both string "@script.sorcerer" and the email and put them in the password), then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
 
 So let's dive in. First, we need to discuss the bit-flipping attack. But before that, let's review how decryption works in CBC mode, since this is precisely where the attack takes place.
 
 ![image](./CBC.svg)
+
 
 
