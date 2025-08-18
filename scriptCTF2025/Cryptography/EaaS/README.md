@@ -1,7 +1,8 @@
 ![image](./eaas.png)
 
-This is the best and thoughest crypto chall from the compition.
+### This is the best and thoughest crypto chall from the compition.
 
+# Recon
 They provide us with the source code of the server :
 
 ```python
@@ -114,10 +115,13 @@ In summary, the server workflow is as follows:
 1. A random email is generated and assigned to the user.  
 2. The server asks for a password in hex, which it encrypts and returns.  
 3. The user chooses an option:  
-   - **Option 1:** Checks the `has_flag` variable and returns the flag if it is `True`.  
-   - **Option 2:** Requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
+   - **Option 1:** The server checks the `has_flag` variable and returns the flag if it is `True`.  
+   - **Option 2:** The server requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
 
-To solve the challenge, we need to craft a password that meets the constraints, then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
+To solve the challenge, we need to craft a password that meets the constraints(maybe we can change one char from both string "@script.sorcerer" and the email and put them in the password), then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
 
+So let's dive in. First, we need to discuss the bit-flipping attack. But before that, let's review how decryption works in CBC mode, since this is precisely where the attack takes place.
+
+![image](./CBC.svg)
 
 
