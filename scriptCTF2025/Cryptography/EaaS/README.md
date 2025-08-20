@@ -154,8 +154,29 @@ Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `
 
 Source : https://i.sstatic.net/bOu8Q.png
 
+The following question come to mind : How we can choose the new value for the `k-th` byte in the **C<sub>i-1<sub>** since we don't know the value of D(C<sub>i</sub>)?Don't worry I will expalain
+
+We search C'<sub>i-1</sub> such that :
+
+P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ D(C<sub>i</sub>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2)
+
+but from equation (1) we have : 
+
+D(C<sub>i</sub>) = C<sub>i-1</sub> ⊕ P<sub>i</sub>
+
+So by substituting in the equation (2) we get 
+
+P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
+
+which gives 
+
+C'<sub>i-1</sub> = P'<sub>i</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
+
+We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</sub> and P<sub>i</sub>. So we can calculate C'
 
 ## Craft the malicious password
+
+
 
 
 
