@@ -158,13 +158,13 @@ The following question come to mind : How we can choose the new value for the `k
 
 We search C'<sub>i-1</sub> such that :
 
-P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ D(C<sub>i</sub>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2)
+P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ D(C<sub>i</sub>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **(2)**
 
-but from equation (1) we have : 
+but from equation **(1)** we have : 
 
 D(C<sub>i</sub>) = C<sub>i-1</sub> ⊕ P<sub>i</sub>
 
-So by substituting in the equation (2) we get 
+So by substituting in the equation **(2)** we get 
 
 P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
 
@@ -175,6 +175,7 @@ C'<sub>i-1</sub> = P'<sub>i</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
 We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</sub> and P<sub>i</sub>. So we can calculate C'
 
 ## Craft the malicious password
+
 
 
 
