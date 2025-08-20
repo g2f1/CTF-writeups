@@ -125,15 +125,18 @@ To solve the challenge, we need to craft a password that meets the constraints(m
 
 So let's dive in. First, we need to discuss the bit-flipping attack. But before that, let's review how decryption works in CBC mode, since this is precisely where the attack takes place.
 
+## AES Decryption and XOR manipulation
+
 ![image](./CBC.png)
 
-The decryption scheme is simple: let C<sub>i</sub> and P<sub>i</sub> denote the i-th ciphertext and plaintext blocks, respectively. And D the AES decryption function
 
-  > P<sub>i</sub> = C<sub>i-1</sub> + D(C<sub>i</sub>)                                     (1)
+The decryption scheme is straightforward. Let `C<sub>i</sub>` and `P<sub>i</sub>` denote the i-th ciphertext and plaintext blocks, respectively, and let `D` represent the AES decryption function. Then, the following relation holds:
 
-"+" is simply the xor opperation. 
+`P<sub>i</sub> = C<sub>i-1</sub> ⊕ D(C<sub>i</sub>)`   (1)
 
-the truth table for the xor operation: 
+Here, "⊕" denotes the XOR operation.
+
+The truth table for XOR is as follows:
 
 | A | B | A XOR B |
 |---|---|---------|
@@ -142,7 +145,10 @@ the truth table for the xor operation:
 | 1 | 0 |    1    |
 | 1 | 1 |    0    |
 
-Now, suppose we have control over C<sub>i-1</sub>. To flip (modify) the k-th byte of P<sub>i</sub>, we simply change the k-th byte of C<sub>i-1</sub>. After the XOR operation, this produces the desired P<sub>i</sub> with the byte altered to the value we want.
+## Byte Modification via XOR
+
+Now, suppose we have control over `C<sub>i-1</sub>`. To flip (or modify) the k-th byte of `P<sub>i</sub>`, we simply alter the k-th byte of `C<sub>i-1</sub>`. After the XOR operation, this produces the desired `P<sub>i</sub>` with the byte changed to the value we want.
+
 
 
 
