@@ -150,6 +150,9 @@ The truth table for XOR is as follows:
 Now, suppose we have control over `C<sub>i-1</sub>`. To flip (or modify) the k-th byte of `P<sub>i</sub>`, we simply alter the k-th byte of `C<sub>i-1</sub>`. After the XOR operation, this produces the desired `P<sub>i</sub>` with the byte changed to the value we want.
 
 
+\[
+P_i = C_{i-1} \oplus D(C_i) \tag{1}
+\]
 
 
 
