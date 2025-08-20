@@ -9,11 +9,12 @@ scriptCTF is a beginner-friendly CTF competition presented by ScriptSorcerers.
 My team : 
 - **Name** : Here2Learn
   
-- **Rank** :
+- **Rank** : 12
   
-- **Solved challenges** :
+- **Total flags** : 34
   
-- **Total points** : 
+- **Total points** : 10660
+
 
 
 
