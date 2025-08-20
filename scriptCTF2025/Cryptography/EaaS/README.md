@@ -130,9 +130,9 @@ So let's dive in. First, we need to discuss the bit-flipping attack. But before 
 ![image](./CBC.png)
 
 
-The decryption scheme is straightforward. Let **C<sub>i</sub>** and **P<sub>i</sub>* denote the `i-th` ciphertext and plaintext blocks, respectively, and let `D` represent the AES decryption function. Then, the following relation holds:
+The decryption scheme is straightforward. Let **C<sub>i</sub>** and **P<sub>i</sub>** denote the `i-th` ciphertext and plaintext blocks, respectively, and let `D` represent the AES decryption function. Then, the following relation holds:
 
-P<sub>i</sub> = C<sub>i-1</sub> ⊕ D(C<sub>i</sub>)   (1)
+P<sub>i</sub> = C<sub>i-1</sub> ⊕ D(C<sub>i</sub>)&nbsp;&nbsp;&nbsp;(1)
 
 Here, "⊕" denotes the XOR operation.
 
@@ -145,7 +145,8 @@ The truth table for XOR is as follows:
 | 1 | 0 |    1    |
 | 1 | 1 |    0    |
 
-Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `k-th` byte of **P<sub>i</sub>**, we simply alter the k-th byte of **C<sub>i-1</sub>**. After the XOR operation, this produces the desired **P<sub>i</sub>** with the byte changed to the value we want.
+Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `k-th` byte of **P<sub>i</sub>**, we simply alter the `k-th` byte of **C<sub>i-1</sub>**. After the XOR operation, this produces the desired **P<sub>i</sub>** with the byte changed to the value we want.
+
 
 
 
