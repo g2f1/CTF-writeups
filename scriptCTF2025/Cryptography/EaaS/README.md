@@ -129,7 +129,7 @@ So let's dive in. First, we need to discuss the bit-flipping attack. But before 
 
 ![image](./CBC.png)
 
-source:![https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#/media/File:CBC_decryption.svg]
+https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#/media/File:CBC_decryption.svg
 
 The decryption scheme is straightforward. Let **C<sub>i</sub>** and **P<sub>i</sub>** denote the `i-th` ciphertext and plaintext blocks, respectively, and let `D` represent the AES decryption function.(**C<sub>0</sub>** represents the IV in our case we don't have control over it so we start from the index 1) Then, the following relation holds:
 
@@ -152,11 +152,12 @@ Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `
 
 ![image](./bitFlip.png)
 
-source:![https://i.sstatic.net/bOu8Q.png]
+https://i.sstatic.net/bOu8Q.png
 
 The following 
 
 ## Craft the malicious password
+
 
 
 
