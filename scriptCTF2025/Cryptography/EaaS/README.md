@@ -154,9 +154,9 @@ Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `
 
 https://i.sstatic.net/bOu8Q.png
 
-The following 
 
 ## Craft the malicious password
+
 
 
 
