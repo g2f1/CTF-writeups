@@ -205,18 +205,19 @@ We encountered issues with two specific bytes:
 - **First case (second block, 15th byte):**  
   We will use the first ciphertext block. According to equation (3):
 
-      New_enc_pass_B1(15) = "m" + Previous_enc_pass_B1(15) + "o"
+      New_enc_pass_B1(15) = "m" ⊕ Previous_enc_pass_B1(15) ⊕ "o"
 
-- **Second case (fourth block, last byte):**  
+- **Second case (last block, last byte):**  
 We will use the fourth ciphertext block. According to equation (3):
 
-      New_enc_pass_B4(16) = "f" + Previous_enc_pass_B4(16) + "r"
+      New_enc_pass_B4(16) = "f" ⊕ Previous_enc_pass_B4(16) ⊕ "r"
 
 The following visualizations summarize the result after these modifications:
 
 ![image](./Dac1.png)
 
 ![image](./Dac2.png)
+
 
 
 
