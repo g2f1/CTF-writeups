@@ -178,7 +178,7 @@ We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</su
 
 ![image](./craftedPass)
 
-    password_bytes = b'aaaaaaaaaaaaaaaaa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref'
+    password = "aaaaaaaaaaaaaaaaa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref"
 
 This password passes all the tests :  
 - Its length is not a multiple of 16  
@@ -219,6 +219,9 @@ The following visualizations summarize the result after these modifications:
 
 ![image](./Dac2.png)
 
+And after decryption we got :
+
+    new_password = "16_byte_of_garbage,dojytbjmyt@notscript.sorcerer,16_bytes_of_garbage@script.sorcerer"
 
 
 
