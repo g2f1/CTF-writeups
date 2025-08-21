@@ -236,28 +236,6 @@ I added a well-commented Python script to this directory that implements all the
 
 # Final thoughts
 
-EAAS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
+EaaS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
 
 Many thanks to all the organizers for their tremendous efforts.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
