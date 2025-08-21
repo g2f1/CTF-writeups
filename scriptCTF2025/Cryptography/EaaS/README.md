@@ -175,12 +175,8 @@ C'<sub>i-1</sub> = P'<sub>i</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub> &nbsp;&n
 We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</sub> and P<sub>i</sub>. So we can calculate C'
 
 ## Craft the malicious password
-    P_1 = b"a"*16 # 1st block (16 byte)
-    P_2and3 = b"a" + b"," + email.encode()[:12] + b"m" + email.encode()[13:] + b"," # 2nd & 3rd blocks (32 bytes)
-    P_4 = b"a"*16 # 4th block (16 byte)
-    P_5 = b"@script.sorceref" # 5th block (16 byte)
 
-    password_bytes = P_1 + P_2and3 + P_4 + P_5
+![image](./assets/craftedPass.png)
 
     password = "aaaaaaaaaaaaaaaaa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref"
 
@@ -243,4 +239,5 @@ I added a well-commented Python script to this directory that implements all the
 EaaS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
 
 Many thanks to all the organizers for their tremendous efforts.
+
 
