@@ -75,19 +75,19 @@ while True:
 It seems too large, but don't worry I will try to explain what it does step by step
 
 ### 1 - Global Variables
-![image](./one.png)
+![image](./assets/one.png)
 
 In this section, a set of variables is defined. We can see that the server will use `AES-CBC` for encryption and decryption with a securely generated random key and IV, but this mode is vulnerable to some attacks like `bit flipping`. There is also two interesting boolean variables, has_flag and sent, are both initialized to false. These might play a crucial role in discovering the flag. 
 ### 2 - send_email function
-![image](./two.png)
+![image](./assets/two.png)
 
 The `send_email` function takes a byte string representing a recipient email (or a comma-separated list of recipients) and iterates through it. If any entry exactly matches the user’s assigned email, it sets the global has_flag variable to `True`.
 ### 3 - Email generation
-![image](./three.png)
+![image](./assets/three.png)
 
 This function assign a random email address ending in @notscript.sorcerer to the user.
 ### 4 - Password's restrictions
-![image](./four.png)
+![image](./assets/four.png)
 
 User must provide a password in hex. Three restrictions:
 
@@ -101,13 +101,13 @@ After that the server gave you two options :
 
 - option 1:
   
-![image](./6ix.png)
+![image](./assets/6ix.png)
 
 The server checks the value of has_flag: if it is True, it prints the flag; otherwise, it prints “No new emails.” This means we need to trigger the server to execute the `send_email` function and satisfy its conditions in order to set has_flag to True. The question then becomes: where in the code is `send_email` called, and under what circumstances? We'll see.
 
 - option 2:
   
-![image](./seven.png)
+![image](./assets/seven.png)
 
 The server decrypts any ciphertext provided by the user. It first checks that the input length is a multiple of 16 bytes and that the last 16 bytes equal `@script.sorcerer` to verify the correct domain. If both conditions are satisfied, it calls `send_email()`. The `sent` variable simply prevents option 2 from being used more than once. Therefore, our goal is to craft input that makes the server execute `send_email()` while fulfilling all its requirements.
 
@@ -127,7 +127,7 @@ So let's dive in. First, we need to discuss the bit-flipping attack. But before 
 
 ## AES Decryption and XOR manipulation
 
-![image](./CBC.png)
+![image](./assets/CBC.png)
 
 Source : https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#/media/File:CBC_decryption.svg
 
@@ -150,7 +150,7 @@ The truth table for XOR is as follows:
 
 Now, suppose we have control over **C<sub>i-1</sub>**. To flip (or modify) the `k-th` byte of **P<sub>i</sub>**, we simply alter the `k-th` byte of **C<sub>i-1</sub>**. After the XOR operation, this produces the desired **P<sub>i</sub>** with the byte changed to the value we want.
 
-![image](./bitFlip.png)
+![image](./assets/bitFlip.png)
 
 Source : https://i.sstatic.net/bOu8Q.png
 
@@ -176,7 +176,7 @@ We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</su
 
 ## Craft the malicious password
 
-![image](./craftedPass)
+![image](./assets/craftedPass)
 
     password = "aaaaaaaaaaaaaaaaa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref"
 
@@ -195,9 +195,9 @@ With a length of 80 bytes the same as the plaintext password. So all things go a
 
 I created this visualization of the decryption process to give you a clearer understanding of what happened.
 
-![image](./Dbc1.png) 
+![image](./assets/Dbc1.png) 
 
-![image](./Dbc2.png)  
+![image](./assets/Dbc2.png)  
 
 We encountered issues with two specific bytes:  
 1. The **15th byte of the second ciphertext block** (we need to flip `"m"` to `"o"`).  
@@ -215,13 +215,14 @@ We will use the fourth ciphertext block. According to equation (3):
 
 The following visualizations summarize the result after these modifications:
 
-![image](./Dac1.png)
+![image](./assets/Dac1.png)
 
-![image](./Dac2.png)
+![image](./assets/Dac2.png)
 
 And after decryption we got :
 
     new_password = "16_byte_of_garbage,dojytbjmyt@notscript.sorcerer,16_bytes_of_garbage@script.sorcerer"
+
 
 
 
