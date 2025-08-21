@@ -170,7 +170,7 @@ P'<sub>i</sub> = C'<sub>i-1</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
 
 which gives 
 
-C'<sub>i-1</sub> = P'<sub>i</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub>
+C'<sub>i-1</sub> = P'<sub>i</sub> ⊕ C<sub>i-1</sub> ⊕ P<sub>i</sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **(3)**
 
 We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</sub> and P<sub>i</sub>. So we can calculate C'
 
@@ -180,24 +180,40 @@ We knew the value of P'<sub>i</sub>(the plaintext we want to get), C<sub>i-1</su
 
     password_bytes = b'aaaaaaaaaaaaaaaaa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref'
 
-This password pass all the tests :
+This password passes all the tests :  
+- Its length is not a multiple of 16  
+- The generated email is not part of it, since we replaced the "o" with "m"  
+- No "script.sorcerer" exists in it  
 
- - Its length is not a multiple of 16   
- - The genrated email is not a part of it since we change the "o" with m
- - No script.sorcerer exist in it.
-   
-I know, I know, you all wondering what's this. But In fact every single added things is done in purpose and I will explain why in the decryption step. Just relax you will understand 
+I know, I know — you’re probably wondering what this is all about. But in fact, every single detail was added on purpose, and I will explain why in the decryption step. Just relax, you’ll understand.  
 
-After I sent the password to the server it give me this : 
+After I sent the password to the server it gave me this :  
 
      Encrypted password (hex) : 56f2b9827a8f8318efcabc61266d90939d28a3c5cee5124d53376c29428e00ab92178395ac900206c0db7246fe81a15c7c23be2f00867ea830c248f8b4b65799d46d3cbd9204b6184f0f3fb7d9f947c7
 
-with a length of 80 bytes the same as the plaintext password. So all things go as expected
+With a length of 80 bytes the same as the plaintext password. So all things go as expected. Now we need to make changes to the ciphertext we get so that after decryption we get a strings that ends with "script.sorcerer" and it has the genreted email on it. Let's do it.
 
+I made this visualisation for the decryption process so you can get better idea of what happend.
 
+![image](./Dbc1.png)
 
+![image](./Dbc2.png)
 
+We have problem in two byte the 15th byte of the second ciphertext block(We need to flip the "m" to an "o"), and the last byte from the last ciphertext block(We need to flip "f" to "r"). 
 
+- For the first case we'll use the first ciphertext block. By (3)
+
+      New_enc_pass_B1(15) = "m" + Previous_enc_pass_B1(15) + "o"
+
+- For the second case we'll use the 4th ciphertext block. By (3)
+
+      New_enc_pass_B4(16) = "f" + Previous_enc_pass_B4(16) + "r"
+
+The following visualations sums up what happened after the modification
+
+![image](./Dac1.png)
+
+![image](./Dac2.png)
 
 
 
