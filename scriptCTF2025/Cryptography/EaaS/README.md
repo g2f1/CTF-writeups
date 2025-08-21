@@ -240,5 +240,8 @@ EaaS is a type of challenge that pushes you to think outside the box, and thatâ€
 
 Many thanks to all the organizers for their tremendous efforts.
 
+$$
+P'_i = C'_{i-1} \oplus D(C_i)
+$$
 
 
