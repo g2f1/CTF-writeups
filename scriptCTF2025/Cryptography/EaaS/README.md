@@ -195,7 +195,8 @@ With a length of 80 bytes the same as the plaintext password. So all things go a
 
 I created this visualization of the decryption process to give you a clearer understanding of what happened.
 
-![image](./Dbc1.png)  
+![image](./Dbc1.png) 
+
 ![image](./Dbc2.png)  
 
 We encountered issues with two specific bytes:  
@@ -217,6 +218,7 @@ The following visualizations summarize the result after these modifications:
 ![image](./Dac1.png)
 
 ![image](./Dac2.png)
+
 
 
 
