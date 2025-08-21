@@ -1,9 +1,9 @@
 ![image](./assets/eaas.png)
 
-### This is the best and thoughest crypto chall from the compition.
+### This is the best and thoughest crypto chall from the competition.
 
 # Recon
-They provide us with the source code of the server :
+They provide us with the source code of the server.
 
 ```python
 #!/usr/bin/env python3
@@ -185,13 +185,13 @@ This password passes all the tests :
 - The generated email is not part of it, since we replaced the "o" with "m"  
 - No "script.sorcerer" exists in it  
 
-I know, I know — you’re probably wondering what this is all about. But in fact, every single detail was added on purpose, and I will explain why in the decryption step. Just relax, you’ll understand.  
+I know, I know, you’re probably wondering what this is all about. But in fact, every single detail was added on purpose, and I will explain why in the decryption step.
 
 After I sent the password to the server it gave me this :  
 
      Encrypted password (hex) : 56f2b9827a8f8318efcabc61266d90939d28a3c5cee5124d53376c29428e00ab92178395ac900206c0db7246fe81a15c7c23be2f00867ea830c248f8b4b65799d46d3cbd9204b6184f0f3fb7d9f947c7
 
-With a length of 80 bytes the same as the plaintext password. So all things go as expected. Now we need to make changes to the ciphertext we get so that after decryption we get a strings that ends with "script.sorcerer" and it has the genreted email on it. Let's do it.
+With a length of 80 bytes the same as the length of the plaintext password. So all things go as expected. Now we need to make changes to the ciphertext we get so that after decryption we get a string that ends with "script.sorcerer" and it has the generated email on it. Let's do it.
 
 I created this visualization of the decryption process to give you a clearer understanding of what happened.
 
@@ -239,5 +239,6 @@ I added a well-commented Python script to this directory that implements all the
 EaaS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
 
 Many thanks to all the organizers for their tremendous efforts.
+
 
 
