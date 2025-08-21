@@ -193,27 +193,31 @@ After I sent the password to the server it gave me this :
 
 With a length of 80 bytes the same as the plaintext password. So all things go as expected. Now we need to make changes to the ciphertext we get so that after decryption we get a strings that ends with "script.sorcerer" and it has the genreted email on it. Let's do it.
 
-I made this visualisation for the decryption process so you can get better idea of what happend.
+I created this visualization of the decryption process to give you a clearer understanding of what happened.
 
-![image](./Dbc1.png)
+![image](./Dbc1.png)  
+![image](./Dbc2.png)  
 
-![image](./Dbc2.png)
+We encountered issues with two specific bytes:  
+1. The **15th byte of the second ciphertext block** (we need to flip `"m"` to `"o"`).  
+2. The **last byte of the last ciphertext block** (we need to flip `"f"` to `"r"`).  
 
-We have problem in two byte the 15th byte of the second ciphertext block(We need to flip the "m" to an "o"), and the last byte from the last ciphertext block(We need to flip "f" to "r"). 
-
-- For the first case we'll use the first ciphertext block. By (3)
+- **First case (second block, 15th byte):**  
+  We will use the first ciphertext block. According to equation (3):
 
       New_enc_pass_B1(15) = "m" + Previous_enc_pass_B1(15) + "o"
 
-- For the second case we'll use the 4th ciphertext block. By (3)
+- **Second case (fourth block, last byte):**  
+We will use the fourth ciphertext block. According to equation (3):
 
       New_enc_pass_B4(16) = "f" + Previous_enc_pass_B4(16) + "r"
 
-The following visualations sums up what happened after the modification
+The following visualizations summarize the result after these modifications:
 
 ![image](./Dac1.png)
 
 ![image](./Dac2.png)
+
 
 
 
