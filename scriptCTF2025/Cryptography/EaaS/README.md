@@ -223,7 +223,7 @@ And after decryption we got :
 
     new_password = "16_byte_of_garbage,dojytbjmyt@notscript.sorcerer,16_bytes_of_garbage@script.sorcerer"
 
-#### Notes 
+## Notes 
 - Commas are mandatory because when the `send_email` function is called, it splits the input string using commas and then checks whether the generated email exists among the resulting parts. In our case, it certainly does.  
 
 - When I tried to solve the challenge, I first crafted a plaintext (the email might change eventually, but I’ll use the previous email as an example) like this: `aa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref` I thought to myself: *“Yeah, that’s a 64-byte password and it will work like a charm; I’ll flip the 'm' with the 'a' from the first block and the 'f' with the last 'a' from the fourth block.”* But None of this happened, yet the `send_email` function executed, but the value of the variable `has_flag` never changed. Then came the “Ahah” moment: after decryption, the first block become a garbage because altering the 'a' changed the entire block after decryption (one of the properties of AES). This led to the loss of an email part. So as I said, everything in the payload was done in purpose.
@@ -239,3 +239,4 @@ I added a well-commented Python script to this directory that implements all the
 EaaS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
 
 Many thanks to all the organizers for their tremendous efforts.
+
