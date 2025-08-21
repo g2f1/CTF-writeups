@@ -119,7 +119,7 @@ In summary, the server workflow is as follows:
    - **Option 1:** The server checks the `has_flag` variable and returns the flag if it is `True`.  
    - **Option 2:** The server requests a hex string, decrypts it, and checks two conditions: the length must be a multiple of 16, and the last 16 bytes must equal `@script.sorcerer`. If valid, it calls `send_email()`, which verifies if the assigned email exists among the recipients and sets `has_flag = True`.
      
-# The attack
+# The attack theory
 
 To solve the challenge, we need to craft a password that meets the constraints(maybe we can change one char from both string "@script.sorcerer" and the email and put them in the password), then submit it for encryption. Using a **CBC bit-flipping attack**, we can modify the ciphertext so that, upon decryption, it satisfies all conditions: ends with `@script.sorcerer` and contains the assigned email. This triggers `send_email()` and sets `has_flag`, allowing us to retrieve the flag.
 
@@ -226,11 +226,19 @@ And after decryption we got :
 #### Notes 
 - Commas are mandatory because when the `send_email` function is called, it splits the input string using commas and then checks whether the generated email exists among the resulting parts. In our case, it certainly does.  
 
-- When I tried to solve the challenge, I first crafted a plaintext (the email might change eventually, but I’ll use the previous email as an example) like this: `aa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref` I thought to myself: *“Yeah, that’s a 64-byte password and it will work like a charm; I’ll flip the 'm' with the 'a' from the first block and the 'f' with the last 'a' from the fourth block.”* But None of this happened, the `send_email` function executed, but the value of the variable `has_flag` never changed. Then came the “Ahah” moment: after decryption, the first block become a garbage because altering the 'a' changed the entire block after decryption (one of the properties of AES). This led to the loss of an email part. So as I said, everything in the payload was done in purpose.
+- When I tried to solve the challenge, I first crafted a plaintext (the email might change eventually, but I’ll use the previous email as an example) like this: `aa,dojytbjmyt@nmtscript.sorcerer,aaaaaaaaaaaaaaaa@script.sorceref` I thought to myself: *“Yeah, that’s a 64-byte password and it will work like a charm; I’ll flip the 'm' with the 'a' from the first block and the 'f' with the last 'a' from the fourth block.”* But None of this happened, yet the `send_email` function executed, but the value of the variable `has_flag` never changed. Then came the “Ahah” moment: after decryption, the first block become a garbage because altering the 'a' changed the entire block after decryption (one of the properties of AES). This led to the loss of an email part. So as I said, everything in the payload was done in purpose.
 
+# Implementation
 
+Enough theory.
 
+I added a well-commented Python script to this directory that implements all the theory I explained earlier. It uses pwntools to communicate with the server. Before checking it out, it’s better to understand the theory and try implementing it yourself.
 
+# Final thoughts
+
+EAAS is a type of challenge that pushes you to think outside the box, and that’s the best part: it doesn’t only require technical knowledge to solve, but it also demand analytical and problem-solving skills. I believe that without the assistance of AI, this challenge wouldn’t have reached such a high number of solves (+100).
+
+Many thanks to all the organizers for their tremendous efforts.
 
 
 
