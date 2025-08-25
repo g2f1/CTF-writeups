@@ -1,4 +1,4 @@
-![image](./mod.png)
+![image](./assets/mod.png)
 
 The chall.py conains :
 
@@ -23,9 +23,10 @@ This is a simple challenge, I just give a number that has slightly more digits t
 
 And secret = num - (num % secret)
 
-![image](./Mod1.png)
+![image](./assets/Mod1.png)
 
 - **Flag** : scriptCTF{-1_f0r_7h3_w1n_4a3f7db1_d1f8ea56a6c7}
+
 
 
 
