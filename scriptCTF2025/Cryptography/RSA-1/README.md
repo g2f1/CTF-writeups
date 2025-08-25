@@ -1,4 +1,4 @@
- ![image](./RSA-1.png)
+ ![image](./assets/RSA-1.png)
 
  The file out.txt contains the following :
 
@@ -75,6 +75,7 @@ else:
 ```
 
 - **Flag** : scriptCTF{y0u_f0und_mr_yu's_s3cr3t_m3g_12a4e4}
+
 
 
 
