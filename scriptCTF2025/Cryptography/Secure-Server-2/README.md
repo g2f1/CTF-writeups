@@ -1,4 +1,4 @@
-![image](./secure-server-2.png)
+![image](./assets/secure-server-2.png)
 
 This time, we are provided with three files: capture.pcap, server.py, and john.doe.py.
 
@@ -98,7 +98,7 @@ for k1_bytes in product(ALPHABET_BYTES, repeat=2):
 print("No matching keys found.")
 
 ```
-![image](./r1.png)
+![image](./assets/r1.png)
 
 For `k3` and `k4`, I applied the same brute-force logic.  
 The difference is that `k4` has a **fixed part**, which must contain the closing brace "`}`".  
@@ -150,10 +150,11 @@ for k3_bytes in product(ALPHABET_BYTES, repeat=2):
 print("No matching keys found.")
 
 ```
-![image](./r2.png)
+![image](./assets/r2.png)
 
 Finally conctanating all the parts gives the flag 
 
 - **Flag** : scriptCTF{s3cr37_m3ss4g3_1337!_7e4b3f8d}
+
 
 
