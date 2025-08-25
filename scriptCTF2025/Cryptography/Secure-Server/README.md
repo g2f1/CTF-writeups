@@ -1,4 +1,4 @@
-![image](./secure-server.png)
+![image](./assets/secure-server.png)
 
 We get zip files that contains two files : server.py and capture.pcap
 
@@ -42,3 +42,4 @@ print(xor(xor(t1,t2),t3).decode())
 
 ```
 - **Flag** : scriptCTF{x0r_1s_not_s3cur3!!!!}
+
