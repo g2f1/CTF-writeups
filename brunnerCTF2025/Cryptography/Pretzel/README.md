@@ -1,1 +1,2 @@
-![image](./pretzel.png)
+![image](./Pretzel.png)
+
