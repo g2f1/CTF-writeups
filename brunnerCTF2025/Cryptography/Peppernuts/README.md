@@ -100,5 +100,19 @@ def encrypt_data(data: str, nonce: str, password: str, hash_salt: str, key_salt:
         return aesgcm.encrypt(nonce_bytes, data_bytes, None).hex()
 
 ```
-All seems strong. This is a script that hashes the password of users along with a salt of 16 bytes and then encrypt each users's data with the corresponding hash using AES-GCM. What I miss is that in the comments there is clue that will help us bruteforce the salt  `like how the test with password="Test123!" at this point had the value of ph be:'8b56d663500f6f36f7b2f329cbcfe65851b146df3567e0b2fcf896391d641b7f'...` so this basically this give us the following equation : `hash(salt:Test123!)=8b56d663500f6f36f7b2f329cbcfe65851b146df3567e0b2fcf896391d641b7f`
+All seems strong. This is a script that hashes the password of users along with a salt of 16 bytes and then encrypt each users's data with the corresponding hash using AES-GCM. What I miss is that in the comments there is clue that will help us bruteforce the salt  "like how the test with password="Test123!" at this point had the value of ph be:'8b56d663500f6f36f7b2f329cbcfe65851b146df3567e0b2fcf896391d641b7f'...". So basically this give us the following equation : `hash(salt:Test123!)=8b56d663500f6f36f7b2f329cbcfe65851b146df3567e0b2fcf896391d641b7f` and I used it brute force the salt using the following script
+
+```py
+import secrets
+from hashlib import sha256
+
+target_hash = "8b56d663500f6f36f7b2f329cbcfe65851b146df3567e0b2fcf896391d641b7f"
+password = "Test123!"
+while True:
+    pepper = hex(secrets.randbits(16))[2:]
+    if sha256(f"{pepper}:{password}".encode()).hexdigest()==target_hash:
+        print("salt :",pepper)
+        break
+```
+`salt : e9d8`
 
