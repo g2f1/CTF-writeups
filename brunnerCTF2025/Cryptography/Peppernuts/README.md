@@ -117,4 +117,5 @@ while True:
 ```
 `salt : e9d8`
 
+Now since we have the slat we can try an bruteforce the password hashes we have using tool like hashcat and the rockyou wordlist
 
