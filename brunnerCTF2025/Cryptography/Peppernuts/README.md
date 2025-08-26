@@ -141,9 +141,10 @@ hashcat cracked 4/5 hashes(except the password for the user Claude): and gives t
     9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c:e9d8::dud
     d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5:e9d8::letmein
 
-Now I will try to decrypt the data with the cracked password using the same script they used for encryption with the cracked password and see if any message contains the flag
+Now I will try to decrypt the data with the cracked password using the same script they used for encryption and see if any message contains the flag
 
 We found the flag in the message of the user brunner : 
 `brunner{Maybe_we_could_mould_some_small_pieces_of_brunsviger_into_peppernut-shaped_treats?_:-D}`
+
 
 
