@@ -117,5 +117,13 @@ while True:
 ```
 `salt : e9d8`
 
-Now since we have the slat we can try an bruteforce the password hashes we have using tool like hashcat and the rockyou wordlist
+Now since we have the salt we can try an bruteforce the password hashes we have using tool like hashcat and the rockyou wordlist. I preapare the file from the given password hashes(passwords.csv) for hascat 
+
+`2db81a83a2038e68795e78e1fffaf2d7270ae18fe2ae99bfe6a8beb5823b8df9:e9d8:
+5e2b36351799d86e074d9c3344b789da448f3de1f0c5218332f1eaa9bfc083e9:e9d8:
+7e9eb12eae8c949bfef7aca8c4a9858c5555811aa80d212211d10b9b714b047c:e9d8:
+9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c:e9d8:
+d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5:e9d8:`
+
+
 
