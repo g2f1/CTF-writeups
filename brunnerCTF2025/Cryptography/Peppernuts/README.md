@@ -117,13 +117,33 @@ while True:
 ```
 `salt : e9d8`
 
-Now since we have the salt we can try an bruteforce the password hashes we have using tool like hashcat and the rockyou wordlist. I preapare the file from the given password hashes(passwords.csv) for hascat 
+    Alice,2db81a83a2038e68795e78e1fffaf2d7270ae18fe2ae99bfe6a8beb5823b8df9
+    Brunner,5e2b36351799d86e074d9c3344b789da448f3de1f0c5218332f1eaa9bfc083e9
+    Claude,7e9eb12eae8c949bfef7aca8c4a9858c5555811aa80d212211d10b9b714b047c
+    Dud,9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c
+    Emul,9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c
+    Frank,d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5A
+    
+Now since we have the salt we can try an bruteforce the password hashes we have using tool like hashcat and the rockyou wordlist. I preapare the file from the given password hashes(passwords.csv) for hascat(the latter don't add ":" so I need to add it as apart of the salt
 
-`2db81a83a2038e68795e78e1fffaf2d7270ae18fe2ae99bfe6a8beb5823b8df9:e9d8:
-5e2b36351799d86e074d9c3344b789da448f3de1f0c5218332f1eaa9bfc083e9:e9d8:
-7e9eb12eae8c949bfef7aca8c4a9858c5555811aa80d212211d10b9b714b047c:e9d8:
-9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c:e9d8:
-d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5:e9d8:`
+    2db81a83a2038e68795e78e1fffaf2d7270ae18fe2ae99bfe6a8beb5823b8df9:e9d8:
+    5e2b36351799d86e074d9c3344b789da448f3de1f0c5218332f1eaa9bfc083e9:e9d8:
+    7e9eb12eae8c949bfef7aca8c4a9858c5555811aa80d212211d10b9b714b047c:e9d8:
+    9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c:e9d8:
+    d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5:e9d8:
 
+And I use the following command : `hashcat -O -a 0 -m 1420 hashes.txt /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule`
+
+hashcat cracked 4/5 hashes(except the password for the user Claude): and gives the following results:
+
+    2db81a83a2038e68795e78e1fffaf2d7270ae18fe2ae99bfe6a8beb5823b8df9:e9d8::gfedcba
+    5e2b36351799d86e074d9c3344b789da448f3de1f0c5218332f1eaa9bfc083e9:e9d8::abcake
+    9d1a04b41fba1a699c291df1bad30913d78293c7224439535c88459f4ffcbf9c:e9d8::dud
+    d1af4f9df518a7f1ad8bfd4a3e92acc1fc4725af7e976d49023f90a42f608ea5:e9d8::letmein
+
+Now I will try to decrypt the data with the cracked password using the same script they used for encryption with the cracked password and see if any message contains the flag
+
+We found the flag in the message of the user brunner : 
+`brunner{Maybe_we_could_mould_some_small_pieces_of_brunsviger_into_peppernut-shaped_treats?_:-D}`
 
 
