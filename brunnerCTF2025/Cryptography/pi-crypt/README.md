@@ -100,7 +100,39 @@ In this step, we try to recover the flag’s length by brute-forcing different p
 
 ### 3 - Determine the key(flag)
 
+We'll use the same technique as `2`.
 
+```py
+for k in range((75-len(flag))//2):
+    winChar = ""
+    i=-1
+    for char in product(base,repeat=2):
+
+        key = flag + "".join(char) +"a"*(75-len(flag)-3) + "}"
+        pt = pie_crypt(ct, key, i0,decrypt=True)
+        known = [
+        pt[(j * len(key) + 1) // 2:(j * len(key) + 1) // 2 + (len(flag)+2) // 2]
+        for j in range(2 * len(pt) // len(key))
+        ]
+        t=" ".join(known)
+        if any(c in t for c in "æøåÆØÅ"):
+            continue
+        i+=1
+
+        test = count_bigram(t)/len(t)
+        if i==0:
+            max = test
+            winChar = "".join(char)
+        else :
+            if test>max:
+                max = test
+                winChar = "".join(char)
+    print("winchar=",winChar)
+    flag+=winChar
+    print(flag)
+```
+
+This part of the solve incrementally recovers the unknown characters of the flag two at a time. For each iteration, it tries every possible pair of characters from the `base` and inserts them into the current flag guess, padding the rest with filler characters (a...}). The candidate key is then used to decrypt the ciphertext, and from the resulting plaintext we extract aligned fragments with half of the size of the actual recovered key + the two added candidates chars from base (using the same slicing trick as before). These fragments are concatenated and scored with the bigram frequency function to measure how “English-like” they are. Any candidate producing forbidden symbols (æøåÆØÅ) is discarded immediately. Among the remaining candidates, the pair of characters that yields the highest bigram score is chosen as the correct extension of the flag. This process is repeated in a loop, gradually appending two characters per round until the full flag is recovered.
 
 
 
