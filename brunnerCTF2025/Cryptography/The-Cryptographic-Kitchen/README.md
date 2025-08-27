@@ -1,4 +1,4 @@
-![image](./kitchen.png)
+![image](./assets/kitchen.png)
 
 It's El-Gamal cryptosystem. But the parameter are too small so we can caclculate the discrete log effeicintly using Pohlib-hellman algo and get the flag.
 
@@ -34,3 +34,4 @@ m = 108256065500018
 flag = "brunner{"+long_to_bytes(m).decode()+"}"
 print(flag) #brunner{buTT3r}
 ```
+
