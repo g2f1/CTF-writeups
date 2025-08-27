@@ -1,4 +1,4 @@
-![image](./half_backed.png)
+![image](./assets/half_backed.png)
 
 This is a super easy challenge. They gave us n,e, and c the cipher but n is a power of 2.
 
@@ -16,6 +16,7 @@ flag = long_to_bytes(pow(c,d,n)).decode()
 print(f"the flag is {flag}")
 # the flag is brunner{s1ngl3_pr1m3_1s_d0ubl3_tr0ubl3}
 ```
+
 
 
 
