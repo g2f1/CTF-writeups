@@ -1,4 +1,4 @@
-![image](./Encrypted_desp.png)
+![image](./assets/Encrypted_desp.png)
 
 In this challenge they gave us the followning python script
 
@@ -71,3 +71,4 @@ if __name__=="__main__":
 
 ```
 and I found the flag in a pdf file after I decrypt it's content `brunner{mY_pr3c10u5_r3c1p35_U_f0und_7h3m}`
+
