@@ -1,4 +1,4 @@
-![image](./peppernuts.png)
+![image](./assets/peppernuts.png)
 
 In this challenge we get three files : a large python script flooded by comments , two csv files containing hashes of passwords and other information.
 
@@ -145,6 +145,7 @@ Now I will try to decrypt the data with the cracked password using the same scri
 
 We found the flag in the message of the user brunner : 
 `brunner{Maybe_we_could_mould_some_small_pieces_of_brunsviger_into_peppernut-shaped_treats?_:-D}`
+
 
 
 
