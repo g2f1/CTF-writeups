@@ -48,9 +48,26 @@ This cipher uses a custom shift system based on a 100-character alphabet (base) 
 
 The goal is to recover the key used for encryption which represents the flag.
 
-The solve for this challenge go through 3 steps : 
+From the challenge description, we can assume that the plaintext is composed of English words, which is a key advantage for solving it. The solution can be broken down into three main steps :
 
 ### 1 - Determine the i0, initial value of i
+
+The only way to that is by bruteforce. Go throught all the values from 1 to 1000 and see if the output gives something readable.
+
+```py
+def check(s: str) -> bool:
+    return s.isalpha() and (s.islower() or s.isupper() or s.istitle()) and not any(c in s for c in "æøåÆØÅ")
+
+# Try to guess starting point of i
+flag = "brunner{"
+for i in range(1000):
+    pt = pie_crypt(ct[:4], flag, i,decrypt=True)
+    if check(pt[:4]):
+        print(i, pt[:10])
+
+i0 = 765
+```
+Since only 8 characters of the key(flag) are revealed, we can decrypt just the first 4 characters of the ciphertext. To reduce the number of possible candidates, I applied a filtering function: the result must be alphabetic, consistently cased (all lowercase, all uppercase, or title case), and must not contain any of the special characters æøåÆØÅ. After applying this filter, only 8 candidates remain, one of them is "Blue", so we select the corresponding index i.
 
 
 
