@@ -50,7 +50,9 @@ The goal is to recover the key used for encryption which represents the flag.
 
 The solve for this challenge go through 3 steps : 
 
-### 1-Determin the i0 initial value of i
+### 1 - Determine the i0, initial value of i
+
+
 
 
 
