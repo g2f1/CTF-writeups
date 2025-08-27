@@ -52,7 +52,7 @@ From the challenge description, we can assume that the plaintext is composed of 
 
 ### 1 - Determine the i0, initial value of i
 
-The only way to that is by bruteforce. Go throught all the values from 1 to 1000 and see if the output gives something readable.
+The only way to that is by bruteforce. Go throught all the values from 0 to 999 and see if the output gives something readable.
 
 ```py
 def check(s: str) -> bool:
@@ -67,7 +67,7 @@ for i in range(1000):
 
 i0 = 765
 ```
-Since only 8 characters of the key(flag) are revealed, we can decrypt just the first 4 characters of the ciphertext. To reduce the number of possible candidates, I applied a filtering function: the result must be alphabetic, consistently cased (all lowercase, all uppercase, or title case), and must not contain any of the special characters æøåÆØÅ. After applying this filter, only 8 candidates remain, one of them is "Blue", so we select the corresponding index i.
+Since only 8 characters of the key(flag) are revealed, we can decrypt just the first 4 characters of the ciphertext. To reduce the number of possible candidates, I applied a filtering function: the result must be alphabetic, consistently cased (all lowercase, all uppercase, or title case), and must not contain any of the special characters æøåÆØÅ. After applying this filter, only 8 candidates remain, one of them is "Blue", so we select the corresponding index i used as i0.
 
 ### 2 - Determine the length of the key
 
@@ -135,6 +135,7 @@ for k in range((75-len(flag))//2):
 This part of the solve incrementally recovers the unknown characters of the flag two at a time. For each iteration, it tries every possible pair of characters from the `base` and inserts them into the current flag guess, padding the rest with filler characters (a...}). The candidate key is then used to decrypt the ciphertext, and from the resulting plaintext we extract aligned fragments with half of the size of the actual recovered key + the two added candidates chars from base (using the same slicing trick as before). These fragments are concatenated and scored with the bigram frequency function to measure how “English-like” they are. Any candidate producing forbidden symbols (æøåÆØÅ) is discarded immediately. Among the remaining candidates, the pair of characters that yields the highest bigram score is chosen as the correct extension of the flag. This process is repeated in a loop, gradually appending two characters per round until the full flag is recovered.
 
 ![image](./assets/results.png)
+
 
 
 
