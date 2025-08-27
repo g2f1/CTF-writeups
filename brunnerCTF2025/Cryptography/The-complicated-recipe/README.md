@@ -1,4 +1,4 @@
-![image](./Complicated_recipe.png)
+![image](./assets/Complicated_recipe.png)
 
 This challenge is relatively easy. The flag is encrypted using SDES (Simplified Data Encryption Standard), which relies on a 10-bit key to derive two 8-bit subkeys. Since the key space is only 1024 possibilities, the algorithm is very weak. Therefore, we can simply brute-force the key to recover the flag.
 
@@ -19,3 +19,4 @@ for test in range(1024):
         print("the flag is :",pt) # the flag is : brunner{5D35_15_N0T_H4RD_1F_Y0U_KN0W_H0W_T0_JU5T_B4K3}
         break
 ```
+
