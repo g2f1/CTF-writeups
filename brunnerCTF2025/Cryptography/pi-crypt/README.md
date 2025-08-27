@@ -8,7 +8,7 @@ I didn’t manage to solve the challenge during the competition, but I came very
 
 pi-crypt is a custom cryptographic algorithm that uses the first 1,000 digits of π and a key to shift the characters of a message. The scheme operates over a set of 100 printable characters.
 
-We got three files : the script of the cipher , he ciphertext and the pi digits.
+We got three files : the script of the cipher , the ciphertext and the pi digits.
 
 ```py
 base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789æøåÆØÅ .,!?-:()[]/{}=<>+_@^|~%$#&*`“';"
@@ -135,6 +135,7 @@ for k in range((75-len(flag))//2):
 This part of the solve incrementally recovers the unknown characters of the flag two at a time. For each iteration, it tries every possible pair of characters from the `base` and inserts them into the current flag guess, padding the rest with filler characters (a...}). The candidate key is then used to decrypt the ciphertext, and from the resulting plaintext we extract aligned fragments with half of the size of the actual recovered key + the two added candidates chars from base (using the same slicing trick as before). These fragments are concatenated and scored with the bigram frequency function to measure how “English-like” they are. Any candidate producing forbidden symbols (æøåÆØÅ) is discarded immediately. Among the remaining candidates, the pair of characters that yields the highest bigram score is chosen as the correct extension of the flag. This process is repeated in a loop, gradually appending two characters per round until the full flag is recovered.
 
 ![image](./assets/results.png)
+
 
 
 
