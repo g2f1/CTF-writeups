@@ -44,7 +44,13 @@ assert all(c in base for c in text+flag) and flag[:8] + flag[-1] == 'brunner{}'
 with open('baked_pie.txt', 'w', encoding="utf-8") as f:
     f.write(pie_crypt(text, flag))
 ```
-This cipher uses a custom substitution system based on a 100-character alphabet (base) and a 1000-digit string (pie). For each character in the plaintext, it generates a shifting value derived from two digits of pie, which are indexed using both the cumulative position and the numeric values of the key’s characters. Each round, the cipher reads two digits from pie, combines them into a two-digit number (d1d2), and uses that as the shift amount. The plaintext character is then mapped to its position in base, shifted forward by that amount (or backward during decryption), and wrapped around modulo 100. This effectively turns the algorithm into a variant of a polyalphabetic Caesar cipher, where the shifts are not static but depend on both the secret key and the pie digits, making the encryption dynamic and non-repeating.
+This cipher uses a custom shift system based on a 100-character alphabet (base) and a 1000-digit string (pie). For each character in the plaintext, it generates a shifting value derived from two digits of pie, which are indexed using both the cumulative position and the numeric values of the key’s characters. Each round, the cipher reads two digits from pie, combines them into a two-digit number (d1d2), and uses that as the shift amount. The plaintext character is then mapped to its position in base, shifted forward by that amount (or backward during decryption), and wrapped around modulo 100. This effectively turns the algorithm into a variant of a polyalphabetic Caesar cipher, where the shifts are not static but depend on both the secret key and the pie digits, making the encryption dynamic and non-repeating.
+
+The goal is to recover the key used for encryption which represents the flag.
+
+The solve for this challenge go through 3 steps : 
+
+#### 1-Determin the i0 initial value of i
 
 
 
