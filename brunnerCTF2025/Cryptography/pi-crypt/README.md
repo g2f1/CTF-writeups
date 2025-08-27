@@ -69,6 +69,37 @@ i0 = 765
 ```
 Since only 8 characters of the key(flag) are revealed, we can decrypt just the first 4 characters of the ciphertext. To reduce the number of possible candidates, I applied a filtering function: the result must be alphabetic, consistently cased (all lowercase, all uppercase, or title case), and must not contain any of the special characters æøåÆØÅ. After applying this filter, only 8 candidates remain, one of them is "Blue", so we select the corresponding index i.
 
+### 2 - Determine the length of the key
+
+Before attempting to recover the flag, it is essential to determine its length. Since the cipher repeatedly cycles over the key when encrypting the plaintext, every few positions we can correctly decrypt 4 consecutive characters. By leveraging the most common English bigrams, we can brute-force the key length and identify the correct one.
+
+```py
+#Count how much the first 200 most frequent english bi-grams appears in a text
+def count_bigram(r):
+    t=0
+    for bg in bigrams:
+        t+=r.count(bg)
+    return t
+
+for l in range(100):
+    key = flag + "a"*l
+    pt = pie_crypt(ct, key, decrypt=True, i=i0)
+    known = [ pt[(j * len(key) + 1) // 2:(j * len(key) + 1) // 2 + 4] for j in range(2 * len(pt) // len(key)) ] # builds a list of all 4-character segments after each reuse of the key.
+    text = " ".join(known)
+    score = count_bigram(text)/len(text)
+    if l==0:
+        max = score
+        winner = len(key)
+    else :
+        if score>max:
+            max = score
+            winner = len(key)
+print("flag's length is :",winner)
+``` 
+In this step, we try to recover the flag’s length by brute-forcing different possibilities. For each candidate length `l`, we extend the known part of the flag with padding characters `"a"*l` and attempt decryption. Since the cipher cycles over the key, this produces several short `4-character` chunks of plaintext. We then join these chunks and score the result using a bigram frequency check `count_bigram`, which counts how many common English bigrams appear in the text. The assumption is that the correct key length will produce more natural English-like fragments, thus achieving a higher bigram score. By keeping track of the best-scoring candidate, we can estimate the actual length of the flag. At the end we find out that the key length is 75.
+
+### 3 - Determine the key(flag)
+
 
 
 
